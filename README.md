@@ -143,23 +143,22 @@ Using Language/IDE <br/>
 <p align="center"><img src="https://user-images.githubusercontent.com/80378085/150941216-518819eb-6969-4fee-abc8-d81d4ecd9bfb.png" width="400px"></p>
 <br/>
 
-<p align="center"><img src="https://user-images.githubusercontent.com/80378085/150939646-ea215a63-4a2d-4de6-87b8-82c7999b5fde.png" width="800px"></p>
-<br/>
-
 상점에서 아이템을 사고, 배치합니다. 직원 고용탭에서는 직원고용을 할 수 있습니다. 직원마다 능력과, 필요한 자금이 다릅니다.
-<p align="center"><img src="https://user-images.githubusercontent.com/80378085/150940034-e5cedfdc-7738-41d6-970f-07d3db5fc899.png" width="400px"></p>
+<p align="center"><img src="https://user-images.githubusercontent.com/80378085/150941720-a5b8cc3c-d1c8-4ec6-9965-f0abac3d353c.png" width="400px"></p>
 <br/>
 
+직원과 자금이 있다면, 게임을 출시 합니다. 원하는 옵션을 선택할 수 있습니다.
+<p align="center"><img src="https://user-images.githubusercontent.com/80378085/150941754-48239e4b-6805-4c0f-8f31-288a082b17f6.png" width="400px"></p>
+<br/>
 
+일정 수준까지 게임을 진행하면, 회사가 어느 정도 성장할 수 있습니다. 아래는 게임 중반의 진행 화면입니다.
+<p align="center"><img src="https://user-images.githubusercontent.com/80378085/150943337-20824107-3bcd-46d0-9b4c-e9ac0f270846.png" width="400px"></p>
+<br/>
 
- ![image](https://user-images.githubusercontent.com/80378085/150940223-cb4260c6-10de-48e8-baaf-ce2b12811768.png)
+잘못하면 파산할수도 있습니다. 게임을 잘 진행했다면, 엔딩을 볼 수 있습니다. 아래는 파산과 엔딩 화면입니다.
+<p align="left"><img src="https://user-images.githubusercontent.com/80378085/150943337-20824107-3bcd-46d0-9b4c-e9ac0f270846.png" width="300px"></p> 
+<p align="right"><img src="https://user-images.githubusercontent.com/80378085/150943337-20824107-3bcd-46d0-9b4c-e9ac0f270846.png" width="300px"></p>
 
-
- ![image](https://user-images.githubusercontent.com/80378085/150939906-eb783881-afc5-412b-9623-c7af2d343620.png)
-
-<p align="center"><img src="https://user-images.githubusercontent.com/80378085/150803951-81381b4d-2658-4a11-b17e-de43000c439d.png" width="400px"></p>
- 
-![image](https://user-images.githubusercontent.com/80378085/150803951-81381b4d-2658-4a11-b17e-de43000c439d.png)
 
 ### 사용 이미지 목록
 35 Images
