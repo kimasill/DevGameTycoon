@@ -162,8 +162,12 @@ Using Language/IDE <br/>
 <p align="center"><img src="https://user-images.githubusercontent.com/80378085/150943337-20824107-3bcd-46d0-9b4c-e9ac0f270846.png" width="400px"></p>
 <br/>
 
-잘못하면 파산할수도 있습니다. 게임을 잘 진행했다면, 엔딩을 볼 수 있습니다. 아래는 파산과 엔딩 화면입니다.
+잘못하면 파산할수도 있습니다. 게임을 잘 진행했다면, 엔딩을 볼 수 있습니다. 아래는 파산과 엔딩 화면입니다.ㄴ
 <p align="left"><img src="https://user-images.githubusercontent.com/80378085/150943337-20824107-3bcd-46d0-9b4c-e9ac0f270846.png" width="250px"></p> <p align="right"><img src="https://user-images.githubusercontent.com/80378085/150943337-20824107-3bcd-46d0-9b4c-e9ac0f270846.png" width="250px"></p>
+
+:---:|:---:
+ ![image](https://user-images.githubusercontent.com/80378085/150944920-70539d1f-3354-4654-a5a5-0743c36cd130.png)| ![image](https://user-images.githubusercontent.com/80378085/150945003-58fc2868-4ef2-44c8-912b-db41408cf29f.png)
+
 
 
 ### 사용 이미지 목록
