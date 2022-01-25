@@ -133,15 +133,17 @@ Using Language/IDE <br/>
 
 **Intro**   
 게임시작 시 첫 인트로 화면. 팀 로고를 비춰줍니다. 
-![image](https://user-images.githubusercontent.com/80378085/150803998-8fdb33db-4641-473c-a303-7822a035cef1.png)
+<p align="center"><img src="https://user-images.githubusercontent.com/80378085/150803998-8fdb33db-4641-473c-a303-7822a035cef1.png" width="400px"></p>
 <br/>
 
 **InGame**
 게임을 시작하면 사무실의 모습을 보여줍니다. 상단에는 날짜, 회사자금을 표시합니다.
 플레이어는 메뉴탭을 열어 행동할 수 있습니다.
+ 
 
-<p align="left"><img src="https://user-images.githubusercontent.com/80378085/150803951-81381b4d-2658-4a11-b17e-de43000c439d.png" width="400px"></p>
-
+ 
+<p align="center"><img src="https://user-images.githubusercontent.com/80378085/150803951-81381b4d-2658-4a11-b17e-de43000c439d.png" width="400px"></p>
+ 
 ![image](https://user-images.githubusercontent.com/80378085/150803951-81381b4d-2658-4a11-b17e-de43000c439d.png)
 
 ### 사용 이미지 목록
