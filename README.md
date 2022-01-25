@@ -247,3 +247,6 @@ System.out.println("이동종료");
 프로젝트에 대한 세부사항은 
 [여기](https://kimasill.tistory.com/)
 에서 확인 가능 합니다.
+
+<br/>
+![image](https://user-images.githubusercontent.com/80378085/150950345-9677d99b-8535-4cb8-8c30-c98b47de16ff.png)
