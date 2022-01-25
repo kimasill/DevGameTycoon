@@ -25,7 +25,8 @@ Java Swing 으로 제작하였기 때문에 완전한 게임의 모습을 갖추
 - 중요 코드
 
 1. **run함수** 게임 흐름 관장   
-'''   
+
+```
 	@Override   
 	public void run() {   
 		int hour = 0;   
@@ -78,7 +79,7 @@ Java Swing 으로 제작하였기 때문에 완전한 게임의 모습을 갖추
 			e.printStackTrace();   
 		}   
 	}   
-'''   
+``` 
 2. 
 
 - 실행 캡처(Demo):   
