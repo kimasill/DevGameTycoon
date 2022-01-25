@@ -50,7 +50,7 @@ Using Language/IDE <br/>
 게임에 들어가는 모든 이미지는
 [aseprite](https://www.aseprite.org/) 
 툴을 이용하여 제작하였습니다. 이미지 목록은 
-[여기](#사용 이미지 목록) 
+[여기](### 사용 이미지 목록) 
 에서 확인 가능합니다.
 
 5. 
@@ -130,5 +130,5 @@ Using Language/IDE <br/>
 
 ![image](https://user-images.githubusercontent.com/80378085/150803951-81381b4d-2658-4a11-b17e-de43000c439d.png)
 
-**사용 이미지 목록**
+### 사용 이미지 목록
 - 
