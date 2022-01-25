@@ -80,7 +80,7 @@ Using Language/IDE <br/>
 게임의 전반적인 실행 화면을 공개합니다.
 
 **Intro**   
-게임시작 시 첫 인트로 화면. 팀 로고를 비춰줍니다. 
+게임시작 시 첫 인트로 화면. 팀 로고를 비춰줍니다. 로고는 위에서 아래로 이동하여 중간에서 멈춥니다.
 <p align="center"><img src="https://user-images.githubusercontent.com/80378085/150803998-8fdb33db-4641-473c-a303-7822a035cef1.png" width="400px"></p>
 <br/>
 
