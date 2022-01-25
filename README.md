@@ -56,7 +56,7 @@ Using Language/IDE <br/>
 게임에 들어가는 모든 이미지는
 [aseprite](https://www.aseprite.org/) 
 툴을 이용하여 제작하였습니다. 이미지 목록은 
-[여기](#사용-이미지-목록) 
+[여기](#5.-사용-이미지-목록) 
 에서 확인 가능합니다.
 <br/>
 <br/>
@@ -115,73 +115,82 @@ Using Language/IDE <br/>
 ## 4. 중요 코드
 <br/>
 프로젝트의 특징은 게임 흐름을 관장 하는 함수 입니다. Java Swing을 이용하여 GUI를 구현하였기 때문에, 정상적인 흐름으로 게임 진행을 위해서는 쓰레드 사용이 필수입니다. 다만 해당 방식으로는 프레임 레이트에 따른 싱크 기능을 구현하지 못하기 때문에, 싱글 게임 구현만 가능합니다. 
+<br/>
 
 **시간 흐름 부분**
+
 ```
-	@Override   
-	public void run() {   
-		int hour = 0;   
-		try {   
-			while (true) {   
-				sleep(sleepTime);   
-				/*
+public void run() {   
+	int hour = 0;   
+	try {   
+		while (true) {   
+			sleep(sleepTime);   
+/*
 *일정 시간동안 sleep하며 sleep 한 시간은 1시간이 됩니다. *24시간이 합쳐지면 게임시간으로 하루가 지나갑니다.
 */
-				if (isRun && !menu.isVisible() && layeredPane.getComponentCountInLayer(JLayeredPane.POPUP_LAYER) == 0) {   
-					//메뉴가 나타나면 시간이 멈춤
-					*
+			if (isRun && !menu.isVisible() && 		layeredPane.getComponentCountInLayer(JLayeredPane.POPUP_LAYER) == 0) 
+			{   
+			//메뉴가 나타나면 시간이 멈춤
+/*
 layeredPane의 자식 컴포넌트의 개수가 0일 때 시간을 체크합니다. 창이 열리면 시간이 *가지않습니다.
 */
-                    if (hour == 12) {   
-                        //오전 오후   
-                    }   
-                    if (++hour == 24) {   
-                        // 하루가 지남   
-                        com.setTime(1);   
-                        com.sellGame();   
-			/*
+			    if (hour == 12) {   
+				//오전 오후   
+			    }   
+			    if (++hour == 24) {   
+				// 하루가 지남   
+				com.setTime(1);   
+				com.sellGame();   
+/*
 *직원이 자리에 없을 때, 직원의 체력이 없을때를 체크합니다.
-*체력이없다면 직원을 집으로 돌려보냅니다. /*
-                        for(Developer dev : com.getDevList()) {   
-                            if(!dev.isMoving && dev.x != dev.deskPos.x)   
-                                dev.goDesk();   
-                            if(dev.getHealth() == 0)   
-                                dev.goHome();   
-                        }                     
-                        if (com.getTime() % 30 == 0) {                               
-                            if (com.adjustment())   
-                                delinquencyStack++;   
-                            else   
-                                delinquencyStack = 0;   
-                        }   
-                        //프로젝트의 개수를 센다   
-                        if (com.getProjectCount() != 0) {   
-                            com.progressProject();   
-                        }   
-                        if (delinquencyStack == 3) {  //파산 스택이 쌓이면 파산합니다. 
-                            JOptionPane.showMessageDialog(null, "");   
-                            System.exit(0);   
-                        }    
-			/*
+*체력이없다면 직원을 집으로 돌려보냅니다. 
+/*
+				for(Developer dev : com.getDevList()) {   
+				    if(!dev.isMoving && dev.x != dev.deskPos.x)   
+					dev.goDesk();   
+				    if(dev.getHealth() == 0)   
+					dev.goHome();   
+				}                     
+				if (com.getTime() % 30 == 0) {                               
+				    if (com.adjustment())   
+					delinquencyStack++;   
+				    else   
+					delinquencyStack = 0;   
+				}   
+				//프로젝트의 개수를 센다   
+				if (com.getProjectCount() != 0) {   
+				    com.progressProject();   
+				}   
+				if (delinquencyStack == 3) {  
+				//파산 스택이 쌓이면 파산합니다. 
+				    JOptionPane.showMessageDialog(null, "");   
+				    System.exit(0);   
+				}    
+/*
 *아이탬 구매 탭의 시간이 현재 시간이랑 14일 이상 차이 나지않으면 *아이탬 탭의 아이템이 바뀌지 않습니다. 개발자 탭도 동일.
 */
-                        if(com.getItemTabTime()+13<com.getTime()) {   
-	    					com.setItemSellList();   
-	    					com.setItemTabTime(com.getTime());   
-    					if(com.getDevTabTime()+13<com.getTime()) {   
-        					com.setDevSellList();   
-        					com.setDevTabTime(com.getTime());   
-    					}   
-    				}    
-                        hour = 0;   
-                    }                     
-                }   
+				if(com.getItemTabTime()+13<com.getTime()) 
+				{   
+					com.setItemSellList();   
+					com.setItemTabTime(com.getTime());   
+					
+					if(com.getDevTabTime()+13<com.getTime()) 
+					{   
+						com.setDevSellList();   
+						com.setDevTabTime(com.getTime());   
+					}   
+				}    
+				hour = 0;   
+			    }                     
 			}   
-		} catch (InterruptedException e) {   
-			// TODO Auto-generated catch block   
-			e.printStackTrace();   
 		}   
+	} 
+	catch (InterruptedException e) 
+	{   
+		// TODO Auto-generated catch block   
+		e.printStackTrace();   
 	}   
+}   
 ``` 
 <br/>
 
@@ -231,7 +240,11 @@ System.out.println("이동종료");
 ```
 <br/>
 
-### 5. 사용 이미지 목록
+## 5. 사용 이미지 목록
 35 Images
 ![image](https://user-images.githubusercontent.com/80378085/150935543-e8dd3525-1656-435c-b189-68961a1ac7b1.png)
 
+## 6. 프로젝트 세부사항
+프로젝트에 대한 세부사항은 
+[여기](https://kimasill.tistory.com/)
+에서 확인 가능 합니다.
