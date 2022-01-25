@@ -24,61 +24,61 @@ Java Swing 으로 제작하였기 때문에 완전한 게임의 모습을 갖추
 
 - 중요 코드
 
-1. **run함수** 게임 흐름 관장
-'''
-	@Override
-	public void run() {
-		int hour = 0;
-		try {
-			while (true) {
-				sleep(sleepTime);
-				if (isRun && !menu.isVisible() && layeredPane.getComponentCountInLayer(JLayeredPane.POPUP_LAYER) == 0) {
+1. **run함수** 게임 흐름 관장   
+'''   
+	@Override   
+	public void run() {   
+		int hour = 0;   
+		try {   
+			while (true) {   
+				sleep(sleepTime);   
+				if (isRun && !menu.isVisible() && layeredPane.getComponentCountInLayer(JLayeredPane.POPUP_LAYER) == 0) {   
 					//메뉴가 나타나면 시간이 멈춤
-                    if (hour == 12) {
-                        //오전 오후
-                    }
-                    if (++hour == 24) {
-                        // 하루가 지남
-                        com.setTime(1);
-                        com.sellGame();
-                        for(Developer dev : com.getDevList()) {
-                            if(!dev.isMoving && dev.x != dev.deskPos.x)
-                                dev.goDesk();
-                            if(dev.getHealth() == 0)
-                                dev.goHome();
-                        }                  
-                        if (com.getTime() % 30 == 0) {                            
-                            if (com.adjustment())
-                                delinquencyStack++;
-                            else
-                                delinquencyStack = 0;
-                        }
-                        //프로젝트의 개수를 센다
-                        if (com.getProjectCount() != 0) {
-                            com.progressProject();
-                        }
-                        if (delinquencyStack == 3) {
-                            JOptionPane.showMessageDialog(null, "");
-                            System.exit(0);
-                        } 
-                        if(com.getItemTabTime()+13<com.getTime()) {
-	    					com.setItemSellList();
-	    					com.setItemTabTime(com.getTime());
-    					if(com.getDevTabTime()+13<com.getTime()) {
-        					com.setDevSellList();
-        					com.setDevTabTime(com.getTime());
-    					}
-    				} 
-                        hour = 0;
-                    }                  
-                }
-			}
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-'''
+                    if (hour == 12) {   
+                        //오전 오후   
+                    }   
+                    if (++hour == 24) {   
+                        // 하루가 지남   
+                        com.setTime(1);   
+                        com.sellGame();   
+                        for(Developer dev : com.getDevList()) {   
+                            if(!dev.isMoving && dev.x != dev.deskPos.x)   
+                                dev.goDesk();   
+                            if(dev.getHealth() == 0)   
+                                dev.goHome();   
+                        }                     
+                        if (com.getTime() % 30 == 0) {                               
+                            if (com.adjustment())   
+                                delinquencyStack++;   
+                            else   
+                                delinquencyStack = 0;   
+                        }   
+                        //프로젝트의 개수를 센다   
+                        if (com.getProjectCount() != 0) {   
+                            com.progressProject();   
+                        }   
+                        if (delinquencyStack == 3) {   
+                            JOptionPane.showMessageDialog(null, "");   
+                            System.exit(0);   
+                        }    
+                        if(com.getItemTabTime()+13<com.getTime()) {   
+	    					com.setItemSellList();   
+	    					com.setItemTabTime(com.getTime());   
+    					if(com.getDevTabTime()+13<com.getTime()) {   
+        					com.setDevSellList();   
+        					com.setDevTabTime(com.getTime());   
+    					}   
+    				}    
+                        hour = 0;   
+                    }                     
+                }   
+			}   
+		} catch (InterruptedException e) {   
+			// TODO Auto-generated catch block   
+			e.printStackTrace();   
+		}   
+	}   
+'''   
 2. 
 
 - 실행 캡처(Demo):   
