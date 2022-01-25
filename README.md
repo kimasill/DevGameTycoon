@@ -140,9 +140,8 @@ Using Language/IDE <br/>
 
 게임을 시작하면 사무실의 모습을 보여줍니다. 상단에는 날짜, 회사자금을 표시합니다.
 플레이어는 메뉴탭을 열어 행동할 수 있습니다.
- ![image](https://user-images.githubusercontent.com/80378085/150941000-326d485a-a900-4613-a084-fb38f2e1d5ce.png)
-
-
+<p align="center"><img src="https://user-images.githubusercontent.com/80378085/150941216-518819eb-6969-4fee-abc8-d81d4ecd9bfb.png" width="800px"></p>
+<br/>
 
 <p align="center"><img src="https://user-images.githubusercontent.com/80378085/150939646-ea215a63-4a2d-4de6-87b8-82c7999b5fde.png" width="800px"></p>
 <br/>
