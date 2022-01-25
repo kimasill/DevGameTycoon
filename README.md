@@ -137,9 +137,10 @@ Using Language/IDE <br/>
 <br/>
 
 **InGame**
+
 게임을 시작하면 사무실의 모습을 보여줍니다. 상단에는 날짜, 회사자금을 표시합니다.
 플레이어는 메뉴탭을 열어 행동할 수 있습니다.
-<p align="center"><img src="https://user-images.githubusercontent.com/80378085/150939646-ea215a63-4a2d-4de6-87b8-82c7999b5fde.png" width="400px"></p>
+<p align="center"><img src="https://user-images.githubusercontent.com/80378085/150939646-ea215a63-4a2d-4de6-87b8-82c7999b5fde.png" width="800px"></p>
 <br/>
 
 상점에서 아이템을 사고, 배치합니다. 직원 고용탭에서는 직원고용을 할 수 있습니다. 직원마다 능력과, 필요한 자금이 다릅니다.
