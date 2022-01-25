@@ -132,13 +132,14 @@ Using Language/IDE <br/>
 게임의 전반적인 실행 화면을 공개합니다.
 
 **Intro**   
-인트로 화면. 팀 로고를 비춰줍니다. 상단에는 날짜, 회사자금을 표시합니다.
-플레이어는 메뉴탭을 열어 행동할 수 있습니다.
+게임시작 시 첫 인트로 화면. 팀 로고를 비춰줍니다. 
 ![image](https://user-images.githubusercontent.com/80378085/150803998-8fdb33db-4641-473c-a303-7822a035cef1.png)
 <br/>
 
 **InGame**
-게임을 시작하면 사무실의 모습을 보여줍니다. 
+게임을 시작하면 사무실의 모습을 보여줍니다. 상단에는 날짜, 회사자금을 표시합니다.
+플레이어는 메뉴탭을 열어 행동할 수 있습니다.
+<p align="left"><img src="hhttps://user-images.githubusercontent.com/80378085/150804194-7b7f4305-369e-4531-9dbe-b0229b72a543.png" width="400px"></p>
 ![image](https://user-images.githubusercontent.com/80378085/150804194-7b7f4305-369e-4531-9dbe-b0229b72a543.png)
 
 ![image](https://user-images.githubusercontent.com/80378085/150803951-81381b4d-2658-4a11-b17e-de43000c439d.png)
