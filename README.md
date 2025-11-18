@@ -242,11 +242,6 @@ System.out.println("이동종료");
 35 Images
 ![image](https://user-images.githubusercontent.com/80378085/150935543-e8dd3525-1656-435c-b189-68961a1ac7b1.png)
 <br/>
-
-## 6. 프로젝트 세부사항
-프로젝트에 대한 세부사항은 
-[여기](https://kimasill.tistory.com/entry/%EA%B2%8C%EC%9E%84%EA%B0%9C%EB%B0%9C-%EA%B2%8C%EC%9E%84-%ED%9A%8C%EC%82%AC-%ED%83%80%EC%9D%B4%EC%BF%A4GameDevTycoon)에서 확인 가능 합니다.
-
 <br/>
 
 ![image](https://user-images.githubusercontent.com/80378085/150950345-9677d99b-8535-4cb8-8c30-c98b47de16ff.png)
