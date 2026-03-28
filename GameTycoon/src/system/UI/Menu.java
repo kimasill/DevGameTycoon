@@ -14,7 +14,6 @@ import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import system.GameBoard;
 import system.cheatkeyAdapter;
 import system.Struct.Company;
 import system.Tab.CheatTab;
@@ -38,7 +37,7 @@ public class Menu implements GameUI, Updateable {
 	private JButton menuBar_btn4;
 	private JButton menuBar_btn5;
 	private JButton menuBar_btn7;
-	
+
 	public Menu(Company company) {
 		this.com = company;
 
@@ -49,10 +48,10 @@ public class Menu implements GameUI, Updateable {
 		menu.setVisible(false);
 		menu.setLayout(null);
 
-		toggleButton = new JButton("메뉴");
+		toggleButton = new JButton("??");
 		toggleButton.setVisible(true);
 		toggleButton.setBounds(layeredPane.getWidth() - 64, layeredPane.getHeight(), 64, 32);
-		
+
 		layeredPane.setLayer(toggleButton, 100);
 		layeredPane.add(toggleButton);
 
@@ -69,20 +68,20 @@ public class Menu implements GameUI, Updateable {
 			}
 		});
 		toggleButton.setBackground(Color.GRAY);
-		
+
 		JPanel menuBar_panel = new JPanel();
 		menuBar_panel.setOpaque(false);
 		menuBar_panel.setBounds(12, 10, 212, 301);
 		menu.add(menuBar_panel);
 		menuBar_panel.setLayout(new GridLayout(6, 0, 5, 5));
 
-		menuBar_btn1 = new JButton("회사 정보");
-		menuBar_btn2 = new JButton("게임 개발");
-		menuBar_btn3 = new JButton("아이템 구매");
-		menuBar_btn4 = new JButton("직원 고용");
-		menuBar_btn5 = new JButton("저장");
-		menuBar_btn6 = new JButton("불러오기");
-		menuBar_btn7 = new JButton("종료");
+		menuBar_btn1 = new JButton("?? ??");
+		menuBar_btn2 = new JButton("?? ??");
+		menuBar_btn3 = new JButton("??? ??");
+		menuBar_btn4 = new JButton("?? ??");
+		menuBar_btn5 = new JButton("??");
+		menuBar_btn6 = new JButton("????");
+		menuBar_btn7 = new JButton("??");
 
 		menuBar_btn1.addActionListener(new MenuButtonListener(TabType.INFO));
 		menuBar_panel.add(menuBar_btn1);
@@ -104,10 +103,9 @@ public class Menu implements GameUI, Updateable {
 
 		menuBar_btn7.addActionListener(new MenuButtonListener(TabType.EXIT));
 		menuBar_panel.add(menuBar_btn7);
-		toggleButton.addKeyListener(new cheatkeyAdapter());					//치트탭 리스너
+		toggleButton.addKeyListener(new cheatkeyAdapter());
 	}
 
-	// e.getSource로 변경 할
 	class MenuButtonListener implements ActionListener {
 		TabType t;
 
@@ -117,7 +115,6 @@ public class Menu implements GameUI, Updateable {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
 			e.getSource();
 			if (layeredPane.getComponentCountInLayer(JLayeredPane.POPUP_LAYER) != 0)
 				return;
@@ -129,46 +126,41 @@ public class Menu implements GameUI, Updateable {
 			case GAMEDEV:
 				tab = new GameDevTab(com);
 				break;
-			case DEVELOPER:		
-				tab = new DevTab(com);		
+			case DEVELOPER:
+				tab = new DevTab(com);
 				break;
-			case ITEM:			
-				tab = new ItemTab(com);				
+			case ITEM:
+				tab = new ItemTab(com);
 				break;
-			case SAVE:				
-				String saveName = null;
-				
-				saveName = JOptionPane.showInputDialog("세이브 파일명을 입력해주세요");					
-				if(saveName!=null) {
-					if(com.saveFile(saveName)) {
-					JOptionPane.showMessageDialog(null, "저장되었습니다.");
+			case SAVE:
+				String saveName = JOptionPane.showInputDialog("??? ???? ?????");
+				if (saveName != null) {
+					if (com.saveFile(saveName)) {
+						JOptionPane.showMessageDialog(null, "???????.");
 					}
 				}
-				
 				break;
-			case LOAD:	
-				tab = new LoadTab(com);				
-				
-				break;	
+			case LOAD:
+				tab = new LoadTab(com);
+				break;
 			case EXIT:
-				if (JOptionPane.showInternalConfirmDialog(null, "종료하시겠습니까?", "종료",
+				if (JOptionPane.showInternalConfirmDialog(null, "?????????", "??",
 						JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
 					System.exit(0);
 				break;
 			default:
-				// 에러처리할것
-
 				break;
 			}
 			if (tab != null)
 				layeredPane.add(tab, JLayeredPane.POPUP_LAYER);
 		}
 	}
+
 	class cheatkeyAdapter extends KeyAdapter {
 		private String keyword = "cheat";
 		private char[] buf;
 		private char[] str;
-		int p = 0; // 다음 글자 포인터임
+		int p = 0;
 
 		cheatkeyAdapter() {
 			this.str = keyword.toCharArray();

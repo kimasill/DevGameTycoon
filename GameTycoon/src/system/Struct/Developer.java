@@ -19,7 +19,7 @@ import system.UI.GameUI;
 public class Developer implements Runnable,GameUI, Serializable{
 	private String name;
 	private int salary;		
-	private int ability;	//개발속도에 영향	10~50
+	private int ability;	//???????? ????	10~50
 	private int maxHealth;		//30~60
 	private int health;	
 	
@@ -41,15 +41,15 @@ public class Developer implements Runnable,GameUI, Serializable{
 	
 	public boolean isMoving= false;
 	
-	private boolean selectToggle=false;//직원 구매탭에서 직원 구매를 위한 토글(업그레이드 버전)
+	private boolean selectToggle=false;//???? ????????? ???? ????? ???? ???(???????? ????)
 	
-	private int isPlaced = 0;//직원 배치 변수
+	private int isPlaced = 0;//???? ??? ????
 	
 	
 	
 	public Developer() { 
-		// 게임의 턴, 회사의 인기도, 회사의 복지수준에 따라 좋은 직원이 나오도록	
-		// 랜덤이름(성, 이름 조합)	
+		// ?????? ??, ????? ???, ????? ????????? ???? ???? ?????? ????????	
+		// ???????(??, ??? ????)	
 		this.name = FirstNameSet.getName() + LastNameSet.getName();
 		
 		Random random = new Random();
@@ -78,15 +78,15 @@ public class Developer implements Runnable,GameUI, Serializable{
 		return this.ability;
 	}
 	
-	//휴식, 환경점수에 영향
-	public void rest(int en) {	
-		if((health+en) < maxHealth)
-			health = maxHealth;
+	public void rest(int en) {
+		health = Math.min(maxHealth, health + en);
 	}
-	
-	
+
+	public int getMaxHealth() {
+		return maxHealth;
+	}
+
 	public boolean work() {
-		System.out.println(this.health);
 		if(this.isMoving)
 			return false;
 		if( --this.health < 0) {
@@ -135,7 +135,6 @@ public class Developer implements Runnable,GameUI, Serializable{
 	
 	public void setDesk(int x, int y) {
 		deskPos.setLocation(x*64+140, y*250+100);
-		System.out.println(deskPos);
 		this.x = deskPos.x;
 		this.y = deskPos.y;
 		setWorkable(true);
@@ -154,10 +153,10 @@ public class Developer implements Runnable,GameUI, Serializable{
 		this.dst_x =dst_x;
 		this.dst_y =dst_y;
 		
-		//다른측이라면? 엘리베이터쪽으로
+		//?????????? ????????????????
 		if(this.y != this.dst_y) {	
 			this.direction = -1;
-		//같은층이라면 목표쪽으로
+		//?????????? ?????????
 		}else {	
 			if(this.x - this.dst_x > 0) {
 				this.direction = -1;
@@ -172,7 +171,7 @@ public class Developer implements Runnable,GameUI, Serializable{
 	
 	
 	/*
-	 *	스프라이트 동작관련 
+	 *	????????? ??????? 
 	 */
 	
 	@Override
@@ -181,27 +180,25 @@ public class Developer implements Runnable,GameUI, Serializable{
 		int frmSpeed = 0;
 		while(isMoving) {
 			try {
-				Thread.sleep(20);			//프레임 속도
-				//프레임변경
+				Thread.sleep(20);			//?????? ???
+				//?????????
 				if(++frmSpeed == 4) {
 					if(++this.frameNum == 4)
 						this.frameNum = 0;
 					frmSpeed = 0;
 				}
 				if(dst_x ==-1 && dst_y == -1) {
-
-					System.out.println("뭐야");
 				}
-				//방향설정
+				//??????
 				x += 4*direction;
 				
-				//엘리베이터 탑승
+				//?????????? ???
 				if(x < 0 && direction < 0) {
 					direction = 1;
 					x = 4;
 					y = dst_y ;//-64
 
-					//집으로
+					//??????
 				}else if(x > FRAME_WIDTH) { 
 					this.isMoving = false;
 					Thread.sleep(2000);
@@ -209,10 +206,9 @@ public class Developer implements Runnable,GameUI, Serializable{
 					x = 800-64;
 					y = 2600;
 
-				//목적지 도착
+				//?????? ????
 				}else if(x == dst_x && y == dst_y) {
 					Thread.sleep(2000);
-					System.out.println("도착");
 					this.dst_x =-1;
 					this.dst_y =-1;
 					this.frameNum = 0;
@@ -229,7 +225,6 @@ public class Developer implements Runnable,GameUI, Serializable{
 
 			}
 		}
-		System.out.println("이동종료");
 	}
 
 

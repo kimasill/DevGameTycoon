@@ -1,0 +1,15 @@
+# Build / IDE
+bin/
+out/
+*.class
+.metadata/
+
+# Local saves (optional: remove next line to track saves)
+save/*.save
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Duplicate project root copy (canonical sources live under GameTycoon/)
+/src/

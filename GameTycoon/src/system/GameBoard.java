@@ -49,10 +49,10 @@ public class GameBoard extends Thread implements GameUI, Updateable {
 	
 
 	public GameBoard() {
-		// 필드초기화--------------
+		// ???????--------------
 		frame = new JFrame();
 		frame.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-		frame.getRootPane().setPreferredSize(new Dimension(FRAME_WIDTH, FRAME_HEIGHT)); // 클라이언트 사이즈 조정
+		frame.getRootPane().setPreferredSize(new Dimension(FRAME_WIDTH, FRAME_HEIGHT)); // ??????? ?????? ????
 		frame.pack();
 		
 		frame.setFocusable(true);
@@ -62,18 +62,16 @@ public class GameBoard extends Thread implements GameUI, Updateable {
 		frame.setLocationRelativeTo(null);
 		
 		
-		com = new Company("나의 게임회사", new Developer("본인", 100, 10), 0);
+		com = new Company("\uB098\uC758 \uAC8C\uC784\uD68C\uC0AC", new Developer("\uBCF8\uC778", 100, 10), 0, rule);
 		draw.initialize(com);
 		
 
-		// 메소드 초기화--------------
+		// ???? ????--------------
 		StartGame start = new StartGame();
 		frame.setContentPane(start);
 		start.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				System.out.print("asadsd");
 				frame.setContentPane(layeredPane);
-				System.out.print("asadsd");
 				initialize();
 			}
 		});
@@ -100,11 +98,11 @@ public class GameBoard extends Thread implements GameUI, Updateable {
 		view.setSize(FRAME_WIDTH,FRAME_HEIGHT-STATUSBAR_HEIGHT);
 		
 		
-		view.addMouseMotionListener(new ViewMouseMotionAdapter());	//화면 스크롤 리스너
+		view.addMouseMotionListener(new ViewMouseMotionAdapter());	//??? ????? ??????
 		
 		
 		
-		view.addMouseListener(new MouseAdapter() {					//화면 클릭 리스너
+		view.addMouseListener(new MouseAdapter() {					//??? ??? ??????
             public void mouseClicked(MouseEvent e) {
             	
                 int mouseX = viewPoint.x +e.getX();
@@ -121,7 +119,7 @@ public class GameBoard extends Thread implements GameUI, Updateable {
 	}
 
 	/*
-	 * 게임 시간 관련된 함수
+	 * ???? ??? ????? ???
 	 */
 	@Override
 	public void run() {
@@ -134,40 +132,43 @@ public class GameBoard extends Thread implements GameUI, Updateable {
 				if (isRun && !menu.isVisible() && layeredPane.getComponentCountInLayer(JLayeredPane.POPUP_LAYER) == 0) {
 
                     if (hour == 12) {
-                        //직원 행동변경;
+                        for (Developer dev : com.getDevList()) {
+                        	if (!dev.isMoving && dev.isWorkable() && dev.x == dev.deskPos.x && dev.getHealth() < dev.getMaxHealth())
+                        		dev.rest(2);
+                        }
                     }
                     if (++hour == 24) {
-                        // 시간 추가
+                        // ??? ???
                         com.setTime(1);
 
                         com.sellGame();
 
 
-                        //직원이 제자리에 없다면
-                        //직원의 체력이 없다면
+                        //?????? ??????? ?????
+                        //?????? ????? ?????
                         for(Developer dev : com.getDevList()) {
-                            if(!dev.isMoving && dev.x != dev.deskPos.x) //조건 수정할것
+                            if(!dev.isMoving && dev.x != dev.deskPos.x) //???? ???????
                                 dev.goDesk();
                             if(dev.getHealth() == 0)
                                 dev.goHome();
                         }
                         //com.getDev(0).setX(com.getDev(0).getX()+2);
 
-                        // 30일 마다
+                        // 30?? ????
                         if (com.getTime() % 30 == 0) {
-                            // 청구금액(임대로 + 직원인건비 + 아이템유지비)
+                            // ??????(???? + ???????? + ????????????)
                             if (com.adjustment())
                                 delinquencyStack++;
                             else
                                 delinquencyStack = 0;
                         }
 
-                        // 진행중인 프로젝트가 존재한다면 진행
+                        // ???????? ????????? ???????? ????
                         if (com.getProjectCount() != 0) {
                             com.progressProject();
                         }
                         if (delinquencyStack == 3) {
-                            JOptionPane.showMessageDialog(null, "파산");
+                            JOptionPane.showMessageDialog(null, "\uD30C\uC0B0\uC785\uB2C8\uB2E4.");
                             System.exit(0);
                         } 
                         if(com.getItemTabTime()+13<com.getTime()) {
@@ -193,7 +194,7 @@ public class GameBoard extends Thread implements GameUI, Updateable {
 
 //-------------------------------------------------------------
 	public void drawMap_test(int x,int y) {
-        //지정 범위 외 글릭
+        //???? ???? ?? ???
         if(x < 140 || x > 780 ||y<250*(11-com.getFloor()))
             return;       
         int row= (y/250)%11;
@@ -201,7 +202,7 @@ public class GameBoard extends Thread implements GameUI, Updateable {
 
         for(Item item:com.getItemList()) {
             if(item.xPos == col && item.yPos == row&&
-               item.getName()=="책상"&&
+               item.getName()=="???"&&
                item.getIsPlaced()==2) {
                 Tab tab = new DevSetTab(com,(Desk)item);
                 layeredPane.add(tab,JLayeredPane.POPUP_LAYER);
@@ -212,7 +213,7 @@ public class GameBoard extends Thread implements GameUI, Updateable {
             }
             if(item.getIsPlaced()==1) {
                 if(item.xPos==col&&item.yPos==row) {
-                    JOptionPane.showMessageDialog(null, "이미 아이템이 존재합니다");
+                    JOptionPane.showMessageDialog(null, "??? ???????? ????????");
                     return;
                 }
                 item.xPos=col;

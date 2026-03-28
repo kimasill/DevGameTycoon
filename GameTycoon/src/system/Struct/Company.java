@@ -1,5 +1,6 @@
 package system.Struct;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -12,11 +13,11 @@ import java.util.Random;
 import java.util.Vector;
 
 import system.Item.Item;
-import system.Tab.ItemTab;
 import system.UI.Updateable;
 
 
 public class Company implements Updateable, Serializable{
+	private static final long serialVersionUID = 1L;
 	private static final int MAX_PROJECT_COUNT = 3;
 	private String companyName;
 	private int money;
@@ -24,7 +25,7 @@ public class Company implements Updateable, Serializable{
 	private Vector<DevGame> project = new Vector(3);
 	private int projectCount;
 	private int popularity;
-	private Rule rule;		//정보력필드 (어떤걸 개발할 능력이 되는지)enable?
+	private Rule rule;		//????????? (???? ?????? ????? ?????)enable?
 	private int time = 0;
 	private int devSpeed=0;
 	private int bill = 100;
@@ -38,20 +39,21 @@ public class Company implements Updateable, Serializable{
 	ArrayList<Item> itemList = new ArrayList<Item>();
 	ArrayList<Developer> devList = new ArrayList<Developer>();
 	
-	public Company(String companyName, Developer defaultDev, int time){
+	public Company(String companyName, Developer defaultDev, int time, Rule rule) {
 		this.companyName = companyName;
-		this.projectCount = 0;		
+		this.projectCount = 0;
 		this.devList.add(defaultDev);
 		this.money = 200;
-		this.popularity = 1;		
-		this.time = time;
-		this.setTime(time);
+		this.popularity = 1;
+		this.rule = rule != null ? rule : new Rule();
+		this.time += time;
+		gameUpdater.signal(this);
 		setItemSellList();
 		setDevSellList();
 	}
 	
 	/*
-	 * 저장, 불러오기 
+	 * ????, ??????? 
 	 */
 	
 	public int getFloor() {
@@ -68,17 +70,14 @@ public class Company implements Updateable, Serializable{
 	
 	
 	public boolean saveFile(String fileName) {
-	    FileOutputStream fo = null;
-	    
 	    try {
-	        fo = new FileOutputStream("save/"+fileName+".save");
+	    	new File("save").mkdirs();
+	        FileOutputStream fo = new FileOutputStream("save/"+fileName+".save");
 	        ObjectOutputStream save = new ObjectOutputStream(fo);
 	        save.writeObject(this);
-	        fo.close();
 	        save.close();
-	
+	        fo.close();
 	    } catch (IOException e) {
-	        System.out.println("E:객체파일을 저장하지 못했습니다.");
 	        return false;
 	    }
 	    return true;
@@ -98,12 +97,20 @@ public class Company implements Updateable, Serializable{
 	    	popularity = com.popularity;
 	    	itemList = com.itemList;
 	    	devList = com.devList;
-	    	rule = com.rule;		//정보력필드 (어떤걸 개발할 능력이 되는지)enable?
+	    	rule = com.rule;
+	    	if (rule == null)
+	    		rule = new Rule();
 	    	time = com.time;
-	    	devSpeed= com.devSpeed;	    	       
-	        
+	    	devSpeed= com.devSpeed;
+	    	floor = com.floor;
+	    	itemTabTime = com.itemTabTime;
+	    	devTabTime = com.devTabTime;
+	    	itemSellList = com.itemSellList != null ? com.itemSellList : new ArrayList<Item>();
+	    	devSellList = com.devSellList != null ? com.devSellList : new ArrayList<Developer>();
+	    	bill = com.bill;
 	        fo.close();
 	        load.close();
+	        gameUpdater.signal(this);
 	
 	    } catch (IOException e) {
 	        return false;
@@ -112,7 +119,7 @@ public class Company implements Updateable, Serializable{
 	    return true;
 	}
 	/*	
-	**	필드 getter & setter 또는 기본 메소드
+	**	??? getter & setter ??? ?? ????
 	*/
 	public ArrayList<Developer> getDevSellList(){
 		return this.devSellList;
@@ -185,13 +192,13 @@ public class Company implements Updateable, Serializable{
 		return devList.get(n);
 	}
 	/*
-	**게임 개발관련
+	**???? ???????
 	*/
 	
 	
-	// 개발시작 메소드
-	// 오류 코드 
-	// 0 : 성공	1 : 돈부족	2 : 팀원부족	3 : 타이틀	4 : 최대개발	5 : 주제또는 장르 미선택
+	// ??????? ????
+	// ???? ??? 
+	// 0 : ????	1 : ??????	2 : ????????	3 : ????	4 : ?????	5 : ??????? ?? ?????
 	public int startDev(String gameTitle, Subject subject, Genre genre, Developer[] team){
 		int cost;
 		try {
@@ -217,7 +224,7 @@ public class Company implements Updateable, Serializable{
 			return 4;
 		
 		this.appendMoney(-cost);
-		Game newGame = new Game(gameTitle, subject, genre);
+		Game newGame = new Game(gameTitle, subject, genre, rule);
 		project.add(new DevGame(newGame, team));
 		projectCount++;
 		for (Developer dev : team) {
@@ -231,7 +238,7 @@ public class Company implements Updateable, Serializable{
 
 	}
 	
-	// 개발진행 메소드, 현재 존재하는 모든 프로젝트를 진행
+	// ???????? ????, ???? ??????? ??? ????????? ????
 	public void progressProject() {
 		for(DevGame dg : project) {
 			if(dg != null)
@@ -240,47 +247,69 @@ public class Company implements Updateable, Serializable{
 		gameUpdater.signal(this);
 	}
 	
-	// 개발이완료된 게임(DevGame::Progress가 10000이상)을 출시합니다.
-	public void launchGame(DevGame game) {
+	public int computeLaunchReview(DevGame dg) {
+		Game g = dg.getGame();
+		int teamSum = 0;
+		int n = 0;
+		for (Developer d : dg.getTeam()) {
+			if (d == null)
+				break;
+			teamSum += d.getAbility();
+			n++;
+		}
+		int avgAbility = n > 0 ? teamSum / n : 0;
+		Random r = new Random();
+		int base = g.getInterest() / 4 + avgAbility / 4;
+		return Math.max(1, Math.min(100, base + r.nextInt(15) - 7));
+	}
+
+	private void adjustPopularityFromReview(int review) {
+		int delta = (review - 50) / 15;
+		popularity = Math.max(1, Math.min(200, popularity + delta));
+	}
+
+	public int getPopularity() {
+		return popularity;
+	}
+
+	public void launchGame(DevGame game, int reviewScore) {
 		Game newGame = game.getGame();
 		newGame.setLaunchTime(this.time);
-		newGame.setPrice();
+		newGame.applyLaunchPricing(this, reviewScore);
+		adjustPopularityFromReview(reviewScore);
 		product.add(newGame);
 		project.remove(game);
 		projectCount--;
-		for(Developer dev : game.getTeam()) {
-			if(dev == null)
+		for (Developer dev : game.getTeam()) {
+			if (dev == null)
 				break;
 			dev.setWorkable(true);
 		}
 		gameUpdater.signal(this);
 	}
-	
-	//게임 판매
+
 	public void sellGame() {
 		Random rand = new Random();
-		for(Game g : product) {
+		for (Game g : product) {
 			int howOld = this.time - g.getLaunchTime();
-			if(howOld > 90)
+			if (howOld > 90)
 				continue;
-			double var;
-			if((var = 10/howOld -1) < 0)
+			int ageDays = Math.max(1, howOld);
+			double var = 10.0 / ageDays - 1;
+			if (var < 0)
 				var = 0;
-			
-			int salesValume = (g.getInterest() * this.popularity);
-			
-			salesValume*= (rand.nextInt(3)/10+1+var); //
-			
-			System.out.println(salesValume);
-			this.appendMoney(g.getPrice() * salesValume);
-			g.setCumulativeSales(salesValume);
-			
+			int salesVolume = g.getInterest() * this.popularity;
+			double dailyNoise = 1.0 + rand.nextDouble() * 0.15;
+			salesVolume = (int) (salesVolume * (1.0 + var) * dailyNoise * g.getSalesAgeMultiplier(howOld));
+			if (salesVolume < 0)
+				salesVolume = 0;
+			this.appendMoney(g.getPrice() * salesVolume);
+			g.setCumulativeSales(g.getCumulativeSales() + salesVolume);
 		}
-		
 	}
 
 	/*
-	**아이템관련
+	**?????????
 	*/
 	
 	public ArrayList<Item> getItemList() {
@@ -305,7 +334,7 @@ public class Company implements Updateable, Serializable{
 	}
 
 	/*
-	**청구금처리
+	**????????
 	*/
 	
 	public void setStatus3(int efficiency) {
@@ -329,8 +358,8 @@ public class Company implements Updateable, Serializable{
 		return freeDevs;
 		
 	}
-	//직원 수
-	public boolean adjustment() {	// 유지비와 직원월급만 정산하도록
+	//???? ??
+	public boolean adjustment() {	// ??????? ????????? ?????????
 		int costOfMaintance = 0;
 		int totalSalary = 0;
 		for(Item item : this.itemList) {
@@ -344,9 +373,8 @@ public class Company implements Updateable, Serializable{
 		
 	}
 
-	public Object getProduct() {
-		// TODO Auto-generated method stub
-		return null;
+	public Vector<Game> getProducts() {
+		return product;
 	}
 
 
