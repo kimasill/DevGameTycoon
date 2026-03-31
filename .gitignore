@@ -13,3 +13,12 @@ Thumbs.db
 
 # Duplicate project root copy (canonical sources live under GameTycoon/)
 /src/
+
+# IDE / 로컬 산출물 (레포에 포함하지 않음)
+.classpath
+.project
+.settings/
+*.jar
+DawnStar.pptx
+/image/
+StartGame.java
